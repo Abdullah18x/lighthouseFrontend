@@ -57,6 +57,8 @@ setEmail = (event) => {
   })
 }
 
+
+
 // setSubject= (event) => {
 //   let value = event.target.value
 //   this.setState({
@@ -133,6 +135,18 @@ setCSV = async (e) => {
     console.log(error);
   }
 };
+
+addBulkTeachers = async () => {
+  let data = new FormData()
+  if (this.state.csvFile === "") {
+    alert('Please upload a valid document')
+  }else{
+    data.append("csvFile", this.state.csvFile);
+    let uploaded = await admin.addLecturers(data, this.state.token);
+  }
+}
+
+
 
   componentDidMount(){
     if(this.state.adminId === null || this.state.adminId === undefined || this.state.userType === null || this.state.userType === undefined || this.state.token === null || this.state.token === undefined){
@@ -224,6 +238,7 @@ setCSV = async (e) => {
                           type="file"
                           className="custom-file-input"
                           id="customFile"
+                          accept=".csv"
                           onChange={this.setCSV}
                         />
                         <label
@@ -234,7 +249,7 @@ setCSV = async (e) => {
                         </label>
                       </div>
                     </div>
-              <button  type="button" className="m-t-30 btn btn-primary">Submit</button>
+              <button  type="button" onClick={this.addBulkTeachers} className="m-t-30 btn btn-primary">Submit</button>
             </form>
           </div>
         </div>

@@ -273,6 +273,21 @@ let addLecturer = async (userName, password, email, name, status, token) => {
     return error;
   }
 };
+
+let addLecturers = async (data, token) => {
+  try {
+    const response = await axios.post(`${url}/lecturer/addBulkLecturers`, data, {
+      headers: {
+        Authorization: token,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
 let addStudent = async (userName, password, email, name, rollNo, token) => {
   try {
     await axios.post(
@@ -966,6 +981,7 @@ export {
   getSubjects,
   insertSubject,
   addLecturer,
+  addLecturers,
   addStudent,
   getLecturerByUserName,
   assignLecturer,
@@ -1003,5 +1019,5 @@ export {
   getfeedback,
   giveFeedback,
   comment,
-  getComments
+  getComments,
 };
