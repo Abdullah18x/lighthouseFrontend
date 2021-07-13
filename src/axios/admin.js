@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "axios"
 
 let url = "http://localhost:3010";
 let getUser = async (userId, token) => {
