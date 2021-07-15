@@ -143,6 +143,7 @@ addBulkTeachers = async () => {
   }else{
     data.append("csvFile", this.state.csvFile);
     let uploaded = await admin.addLecturers(data, this.state.token);
+    console.log(uploaded)
   }
 }
 
