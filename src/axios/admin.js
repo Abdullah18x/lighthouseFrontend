@@ -311,6 +311,20 @@ let addStudent = async (userName, password, email, name, rollNo, token) => {
   }
 };
 
+let addStudents = async (data, token) => {
+  try {
+    const response = await axios.post(`${url}/student/addBulkStudents`, data, {
+      headers: {
+        Authorization: token,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
 let getStudent = async (studentId, token) => {
   try {
     let response =  await axios.post(
@@ -540,6 +554,24 @@ let getAssignedLecturers = async (sectionId, token) => {
       {
         sectionId: sectionId,
       },
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
+let getAssignedLecturersList = async (token) => {
+  try {
+    let response = await axios.post(
+      `${url}/lecturer/getAssignedLecturers`,
+      {},
       {
         headers: {
           Authorization: token,
@@ -983,6 +1015,7 @@ export {
   addLecturer,
   addLecturers,
   addStudent,
+  addStudents,
   getLecturerByUserName,
   assignLecturer,
   updateLecturerStatus,
@@ -991,6 +1024,7 @@ export {
   alllecturerAtRiskStudents,
   getStats,
   getAssignedLecturers,
+  getAssignedLecturersList,
   getSectionStudents,
   getLecturerStudents,
   addSection,

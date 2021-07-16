@@ -1,9 +1,29 @@
 import React, { Component } from "react";
 import NavLink from "./../pages/NavLink.js";
+import { Link } from "@reach/router";
 const logout = require("../axios/logout");
+const lecturer = require("../axios/lecturer");
 const ls = require("local-storage");
 
+
 class TeacherHeader extends Component {
+  state = {
+    lecturerId: ls.get("teacherId"),
+    userType: ls.get("userType"),
+    token: ls.get("token"),
+    name: "",
+  };
+
+  getLecturer = async () => {
+    let returnedLecturer = await lecturer.getUser(
+      this.state.lecturerId,
+      this.state.token
+    );
+    this.setState({
+      name: returnedLecturer.name,
+    });
+  };
+
   logout = async () => {
     let userId = ls("teacherId");
     let userType = ls("userType");
@@ -13,6 +33,10 @@ class TeacherHeader extends Component {
     console.log(response);
     window.location.href = "/";
   };
+
+  componentDidMount() {
+    this.getLecturer();
+  }
   render() {
     return (
       <div className="app">
@@ -61,102 +85,7 @@ class TeacherHeader extends Component {
                 </li>
               </ul>
               <ul className="nav-right">
-                <li className="dropdown dropdown-animated scale-left">
-                  <a href="javascript:void(0);" data-toggle="dropdown">
-                    <i className="anticon anticon-bell notification-badge" />
-                  </a>
-                  <div className="dropdown-menu pop-notification">
-                    <div className="p-v-15 p-h-25 border-bottom d-flex justify-content-between align-items-center">
-                      <p className="text-dark font-weight-semibold m-b-0">
-                        <i className="anticon anticon-bell" />
-                        <span className="m-l-10">Notification</span>
-                      </p>
-                      <a
-                        className="btn-sm btn-default btn"
-                        href="javascript:void(0);"
-                      >
-                        <small>View All</small>
-                      </a>
-                    </div>
-                    <div className="relative">
-                      <div
-                        className="overflow-y-auto relative scrollable"
-                        style={{ maxHeight: "300px" }}
-                      >
-                        <a
-                          href="javascript:void(0);"
-                          className="dropdown-item d-block p-15 border-bottom"
-                        >
-                          <div className="d-flex">
-                            <div className="avatar avatar-blue avatar-icon">
-                              <i className="anticon anticon-mail" />
-                            </div>
-                            <div className="m-l-15">
-                              <p className="m-b-0 text-dark">
-                                You received a new mail
-                              </p>
-                              <p className="m-b-0">
-                                <small>8 min ago</small>
-                              </p>
-                            </div>
-                          </div>
-                        </a>
-                        <a
-                          href="javascript:void(0);"
-                          className="dropdown-item d-block p-15 border-bottom"
-                        >
-                          <div className="d-flex">
-                            <div className="avatar avatar-cyan avatar-icon">
-                              <i className="anticon anticon-alert" />
-                            </div>
-                            <div className="m-l-15">
-                              <p className="m-b-0 text-dark">New Assignment</p>
-                              <p className="m-b-0">
-                                <small>7 hours ago</small>
-                              </p>
-                            </div>
-                          </div>
-                        </a>
-                        <a
-                          href="javascript:void(0);"
-                          className="dropdown-item d-block p-15 border-bottom"
-                        >
-                          <div className="d-flex">
-                            <div className="avatar avatar-green avatar-icon">
-                              <i className="anticon anticon-check-circle" />
-                            </div>
-                            <div className="m-l-15">
-                              <p className="m-b-0 text-dark">
-                                Assignment Returned
-                              </p>
-                              <p className="m-b-0">
-                                <small>8 hours ago</small>
-                              </p>
-                            </div>
-                          </div>
-                        </a>
-                        <a
-                          href="javascript:void(0);"
-                          className="dropdown-item d-block p-15 "
-                        >
-                          <div className="d-flex">
-                            <div className="avatar avatar-red avatar-icon">
-                              <i className="anticon anticon-warning" />
-                            </div>
-                            <div className="m-l-15">
-                              <p className="m-b-0 text-dark">
-                                You have a new update
-                              </p>
-                              <p className="m-b-0">
-                                <small>2 days ago</small>
-                              </p>
-                            </div>
-                          </div>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </li>
+
                 <li className="dropdown dropdown-animated scale-left">
                   <div className="pointer" data-toggle="dropdown">
                     <div className="avatar avatar-image  m-h-10 m-r-15">
@@ -174,27 +103,17 @@ class TeacherHeader extends Component {
                         </div>
                         <div className="m-l-10">
                           <p className="m-t-15 text-dark font-weight-semibold">
-                            Ali Zain
+                            {this.state.name}
                           </p>
                           {/* <p className="m-b-0 opacity-07">UI/UX Desinger</p> */}
                         </div>
                       </div>
                     </div>
-                    <a
-                      href="javascript:void(0);"
+                    
+                    <Link
                       className="dropdown-item d-block p-h-15 p-v-10"
-                    >
-                      <div className="d-flex align-items-center justify-content-between">
-                        <div>
-                          <i className="anticon opacity-04 font-size-16 anticon-user" />
-                          <span className="m-l-10">View Profile</span>
-                        </div>
-                        <i className="anticon font-size-10 anticon-right" />
-                      </div>
-                    </a>
-                    <a
-                      href="javascript:void(0);"
-                      className="dropdown-item d-block p-h-15 p-v-10"
+                      to="/teacher/settings"
+                      state={{}}
                     >
                       <div className="d-flex align-items-center justify-content-between">
                         <div>
@@ -203,7 +122,7 @@ class TeacherHeader extends Component {
                         </div>
                         <i className="anticon font-size-10 anticon-right" />
                       </div>
-                    </a>
+                    </Link>
                     {/* <a
                       href="javascript:void(0);"
                       className="dropdown-item d-block p-h-15 p-v-10"

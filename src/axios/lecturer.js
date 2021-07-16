@@ -1115,6 +1115,50 @@ let getComments = async (fbId,token) => {
     return error;
   }
 };
+
+let updateProfile = async (lecturerId,name, email, token) => {
+  try {
+    const response = await axios.post(
+      `${url}/lecturer/updateProfile`,
+      {
+        lecturerId: lecturerId,
+        name: name,
+        email: email,
+      },
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
+let updatePassword = async (lecturerId,password, token) => {
+  try {
+    const response = await axios.post(
+      `${url}/lecturer/updatePassword`,
+      {
+        lecturerId: lecturerId,
+        password: password
+      },
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
 export {
   getUser,
   getStudent,
@@ -1170,4 +1214,6 @@ export {
   giveFeedback,
   comment,
   getComments,
+  updateProfile,
+  updatePassword
 };

@@ -52,8 +52,8 @@ class StudentProfile extends Component {
     }
     let atRisk = "Not At Risk";
     if (
-      returnedStudent[0].atRisk != null ||
-      returnedStudent[0].atRisk != undefined
+      returnedStudent[0].atRisk !== null ||
+      returnedStudent[0].atRisk !== undefined
     ) {
       if (returnedStudent[0].atRisk === 1) {
         atRisk = "At Risk";

@@ -265,6 +265,49 @@ let getAssignments = async (studentId, token) =>{
     }
   };
 
+  let updateProfile = async (studentId,name, email, token) => {
+    try {
+      const response = await axios.patch(
+        `${url}/student/updateProfile`,
+        {
+          studentId: studentId,
+          name: name,
+          email: email,
+        },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  };
+  
+  let updatePassword = async (studentId,password, token) => {
+    try {
+      const response = await axios.patch(
+        `${url}/student/updatePassword`,
+        {
+          studentId: studentId,
+          password: password
+        },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  };
+
   export{
     getStudent,
     getAssignments,
@@ -279,5 +322,7 @@ let getAssignments = async (studentId, token) =>{
     getfeedback,
     giveFeedback,
     comment,
-    getComments
+    getComments,
+    updateProfile,
+    updatePassword
   }

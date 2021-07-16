@@ -20,6 +20,7 @@ import GradedAssignments from './pages/Student/GradedAssignments'
 import FeedBack3 from './pages/Student/feedback'
 import ViewFeedBack3 from './pages/Student/ViewFeedback';
 import IDE from "./pages/IDE.js";
+import Settings3 from "./pages/Student/settings";
 
 import AdminDashboard from "./pages/Admin/AdminDashboard.js";
 import AdminAddSections from "./pages/Admin/AdminAddSections.js";
@@ -70,6 +71,7 @@ import StudentSubmission2 from "./pages/Teacher/StudentSubmission2";
 import TeacherViewSingleDataSet from "./pages/Teacher/TeacherViewDataSet";
 import FeedBack2 from './pages/Teacher/feedback'
 import ViewFeedBack2 from './pages/Teacher/ViewFeedback';
+import Settings2 from "./pages/Teacher/settings";
 
 import Search from "./components/Search.js";
 
@@ -92,7 +94,7 @@ function App() {
         <GradedAssignments path='/gradedAssignment' />
         <FeedBack3 path="/feedback" />
         <ViewFeedBack3 path='/viewFeedback' />
-        <Settings path="/settings" />
+        <Settings3 path="/settings" />
       </StudentHeader>
 
       <AdminHeader path="/admin/">
@@ -146,7 +148,7 @@ function App() {
         <ViewAssignedDataSet path="/viewAssignedDataSet" />
         <FeedBack2 path="/feedback" />
         <ViewFeedBack2 path='/viewFeedback' />
-        <Settings path="/settings" />
+        <Settings2 path="/settings" />
       </TeacherHeader>
     </Router>
   );
