@@ -154,10 +154,11 @@ class ViewDataSets extends Component {
                     </tbody>
                     <tfoot>
                       <tr>
-                        <th>ID</th>
-                        <th>Full Name</th>
-                        <th>Section</th>
+                      <th>ID</th>
+                        <th>Title</th>
                         <th>Subject</th>
+                        <th>Total Marks</th>
+                        <th>Time Needed to solve</th>
                         <th>Action</th>
                       </tr>
                     </tfoot>

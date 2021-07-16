@@ -233,7 +233,7 @@ addBulkTeachers = async () => {
           <div className="m-t-25">
             <form>
             <div className="form-group">
-                      <label>Upload CSV</label>
+                      <label>Upload CSV (name,email)</label>
                       <div className="custom-file">
                         <input
                           type="file"
